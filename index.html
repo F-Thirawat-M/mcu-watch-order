@@ -1,137 +1,270 @@
-<title>ลำดับดู MCU</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ลำดับดู MCU ทุกเรื่อง</title>
+<meta name="description" content="ภาพยนตร์ ซีรีส์ และตอนพิเศษของ Marvel Cinematic Universe ทุกเรื่อง เรียงตามไทม์ไลน์เนื้อเรื่องหรือตามวันที่ฉาย พร้อมติ๊กเรื่องที่ดูแล้ว">
+<meta property="og:title" content="ลำดับดู MCU ทุกเรื่อง">
+<meta property="og:description" content="เรียงตามไทม์ไลน์เนื้อเรื่องหรือตามวันที่ฉาย พร้อมติ๊กเรื่องที่ดูแล้ว">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F1F2F5" id="themecolor">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314161B'/%3E%3Cpath d='M8 9.5h16M8 16h16M8 22.5h10' stroke='%23F0505B' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+/* apply the saved theme before first paint */
+try{var t=localStorage.getItem('mcu-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}
+</script>
 <style>
-/* Layout: archive wall — era/year bands, each a wrapping grid of 2:3 poster cards */
+/* Layout: archive wall — era/year bands, each a wrapping grid of 2:3 poster cards (or a compact list) */
 :root{
   --bg:#F1F2F5; --surface:#FFFFFF; --fg:#14161B; --muted:#5A606C; --line:#D8DBE2;
-  --accent:#B3202F; --gold:#9A6B12; --chip:#E7E9EE;
+  --accent:#B3202F; --solid:#B3202F; --gold:#8A5F0E; --chip:#E7E9EE;
   --f-display:"Anton","Impact","Arial Narrow",sans-serif;
   --f-body:"IBM Plex Sans Thai","Noto Sans Thai","Leelawadee UI",system-ui,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0E1014; --surface:#171A20; --fg:#ECEEF2; --muted:#9AA1AE; --line:#2A2E37;
-  --accent:#F0505B; --gold:#E2B04A; --chip:#232731; color-scheme:dark}}
+  --accent:#F0505B; --solid:#C9303D; --gold:#E2B04A; --chip:#232731; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0E1014; --surface:#171A20; --fg:#ECEEF2; --muted:#9AA1AE; --line:#2A2E37;
-  --accent:#F0505B; --gold:#E2B04A; --chip:#232731; color-scheme:dark}
+  --accent:#F0505B; --solid:#C9303D; --gold:#E2B04A; --chip:#232731; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  -webkit-tap-highlight-color:transparent;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-bottom:max(48px,env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;opacity:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .wrap{max-width:1180px;margin:0 auto}
-header.top{padding-block:32px 8px;display:grid;gap:14px}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-h1{font-family:var(--f-display);font-weight:400;font-size:clamp(2.4rem,7vw,4.2rem);line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+
+/* ---- header ---- */
+header.top{padding-block:28px 8px;display:grid;gap:12px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(2.3rem,9vw,4.2rem);line-height:1.05;margin:0;letter-spacing:.01em;text-wrap:balance}
 h1 span{color:var(--accent)}
 .lede{color:var(--muted);max-width:62ch;margin:0}
+.iconbtn{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);
+  display:grid;place-items:center;cursor:pointer;padding:0}
+.iconbtn svg{width:18px;height:18px}
+
+/* ---- sticky bar ---- */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
-  display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-block:12px;margin-top:8px}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.tabs{display:flex;gap:4px;background:var(--chip);padding:4px;border-radius:999px}
-.tabs a{font-weight:500;text-decoration:none;color:var(--muted);padding:7px 16px;border-radius:999px;font-size:14px}
-.tabs a[aria-current="page"]{background:var(--surface);color:var(--fg);box-shadow:0 0 0 1px var(--line)}
-.tabs a:focus-visible,.toggle input:focus-visible,.seen input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.toggle{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);cursor:pointer}
-.toggle input{accent-color:var(--accent);width:16px;height:16px}
-.progress{margin-left:auto;display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.meter{width:120px;height:6px;background:var(--chip);border-radius:3px;overflow:hidden}
-.meter i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
-.viewnote{font-size:13px;color:var(--muted);margin:16px 0 0;max-width:70ch}
-section.band{padding-top:36px}
-.bandhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;border-bottom:2px solid var(--fg);padding-bottom:6px;margin-bottom:18px}
-.bandhead h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem,4vw,2.2rem);margin:0;line-height:1.1;letter-spacing:.01em}
+  display:flex;align-items:center;gap:10px;padding-block:10px;margin-top:8px}
+.tabs,.seg{display:flex;gap:4px;background:var(--chip);padding:4px;border-radius:999px;flex:none}
+.tabs a,.seg button{font-weight:500;text-decoration:none;color:var(--muted);padding:0 16px;min-height:36px;border-radius:999px;font-size:14px;
+  display:flex;align-items:center;white-space:nowrap;border:0;background:none;cursor:pointer}
+.tabs a[aria-current="page"],.seg button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 0 0 1px var(--line)}
+.progress{margin-left:auto;font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.progress b{color:var(--fg);font-weight:500}
+.meter{position:absolute;left:0;right:0;bottom:-2px;height:3px;pointer-events:none}
+.meter i{display:block;height:100%;background:var(--accent);width:0;border-radius:0 2px 2px 0;transition:width .3s}
+#totop{width:36px;height:36px;visibility:hidden;opacity:0;transition:opacity .2s}
+#totop.on{visibility:visible;opacity:1}
+
+/* ---- controls ---- */
+.controls{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding-top:16px}
+.search{position:relative}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.search input{width:100%;height:44px;padding:0 14px 0 40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:16px;
+  -webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--muted);opacity:.8}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{flex:none;position:relative;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;user-select:none;-webkit-user-select:none}
+.chip .n{font-family:var(--f-mono);font-size:11px;opacity:.75}
+.chip[aria-pressed="true"],.chip.on,.chip[aria-expanded="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+select.chip{font-size:16px;padding-right:10px;max-width:220px;color:var(--fg)}
+.panel{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px;display:grid;gap:12px;font-size:13px;color:var(--muted)}
+.panel p{margin:0}
+.panel a{color:var(--accent)}
+.keybox{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.keybox label{font-family:var(--f-mono);font-size:12px;flex:1 1 100%}
+.keybox input{flex:1 1 220px;min-width:0;height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:16px}
+.btn{height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer;font-size:14px;white-space:nowrap}
+.btn.primary{background:var(--solid);border-color:var(--solid);color:#fff}
+.btn.quiet{justify-self:start}
+#keystat:empty{display:none}
+.viewnote{font-size:13px;color:var(--muted);margin:0;max-width:72ch}
+.next{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--surface);cursor:pointer;min-height:48px}
+.next .lab{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--accent);flex:none}
+.next .t{font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.next .go{font-size:13px;color:var(--accent);flex:none}
+.next:disabled{cursor:default}
+.next:disabled .go{display:none}
+
+/* ---- bands ---- */
+section.band{padding-top:36px;scroll-margin-top:60px}
+.bandhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 14px;border-bottom:2px solid var(--fg);padding-bottom:6px;margin-bottom:18px}
+.bandhead h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,5vw,2.2rem);margin:0;line-height:1.25;letter-spacing:.01em}
 .bandhead .span{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
-.bandhead .cnt{margin-left:auto;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 16px}
-.card{display:grid;gap:8px;min-width:0}
-.poster{position:relative;aspect-ratio:2/3;max-width:100%;border-radius:6px;overflow:hidden;background:var(--pbg);color:#F6F5F1;
-  box-shadow:0 1px 0 rgba(0,0,0,.08),0 6px 18px -10px rgba(0,0,0,.5);transition:transform .2s ease,filter .2s}
+.bandhead .cnt{margin-left:auto;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:26px 16px}
+
+/* ---- card ---- */
+.card{display:flex;flex-direction:column;gap:8px;min-width:0;scroll-margin-top:84px}
+.poster{position:relative;aspect-ratio:2/3;width:100%;border-radius:6px;overflow:hidden;background:var(--pbg);color:#F6F5F1;flex:none;
+  box-shadow:0 1px 0 rgba(0,0,0,.08),0 6px 18px -10px rgba(0,0,0,.5);transition:transform .2s ease,filter .2s,outline-color .3s;
+  outline:3px solid transparent;outline-offset:3px}
 .poster svg{position:absolute;inset:0;width:100%;height:100%}
 .pno{position:absolute;top:8px;left:9px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--pac)}
 .ptype{position:absolute;top:8px;right:9px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;opacity:.85}
 .ptxt{position:absolute;left:10px;right:10px;bottom:10px;display:grid;gap:2px}
 .pkick{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--pac);line-height:1.3}
-.ptitle{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.98;margin:0;letter-spacing:.01em;overflow-wrap:anywhere}
+.ptitle{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.98;letter-spacing:.01em;overflow-wrap:anywhere}
 .s-xl{font-size:2.1rem}.s-lg{font-size:1.6rem}.s-md{font-size:1.25rem}.s-sm{font-size:1.02rem}
-.pfoot{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;opacity:.8;margin-top:4px;letter-spacing:.06em}
+.pfoot{display:flex;justify-content:space-between;gap:6px;font-family:var(--f-mono);font-size:10px;opacity:.8;margin-top:4px;letter-spacing:.06em}
 .poster.coming{background:repeating-linear-gradient(135deg,#24262C 0 10px,#2C2F36 10px 20px)}
 .poster.coming::after{content:"";position:absolute;inset:6px;border:1px dashed rgba(255,255,255,.35);border-radius:4px}
-.card.done .poster{filter:grayscale(.85) brightness(.7)}
-.card.done .poster::before{content:"✓";position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;
-  background:var(--accent);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:600}
-.card:hover .poster{transform:translateY(-3px)}
-.info{display:grid;gap:1px;font-size:13px;min-width:0}
-.info .name{font-weight:500;color:var(--fg);line-height:1.35}
-.info .meta{color:var(--muted);font-size:12px}
-.info .note{color:var(--gold);font-size:12px;line-height:1.4;margin-top:2px}
-.seen{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;margin-top:4px;width:max-content}
-.seen input{accent-color:var(--accent)}
-.acts{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:4px}
-.acts .seen{margin-top:0}
-.pl{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500}
-.pl:hover{text-decoration:underline}
-.pl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.tag{display:inline-block;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;padding:1px 6px;border-radius:3px;background:var(--chip);color:var(--muted);margin-right:4px;vertical-align:1px}
-.tag.up{background:var(--accent);color:#fff}
-.keybox{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--muted)}
-.keybox label{font-family:var(--f-mono);font-size:12px}
-.keybox input{flex:1 1 240px;min-width:0;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font:inherit}
-.keybox button{padding:7px 14px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;cursor:pointer}
-.keybox button[type=submit]{background:var(--accent);border-color:var(--accent);color:#fff}
-.keybox :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.poster img.real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.poster img.real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;opacity:0;transition:opacity .3s}
+.poster.has-img img.real{opacity:1}
 .poster.has-img svg,.poster.has-img .ptxt,.poster.has-img .ptype{display:none}
 .poster.has-img .pno{z-index:2;background:rgba(0,0,0,.65);color:#fff;padding:1px 6px;border-radius:3px}
-.card.done .poster::before{z-index:3}
-.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:14px}
-footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:grid;gap:6px;max-width:80ch}
-@media (max-width:520px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.progress{margin-left:0;width:100%}.meter{flex:1}
-  .s-xl{font-size:1.8rem}.s-lg{font-size:1.4rem}.s-md{font-size:1.1rem}.s-sm{font-size:.92rem}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
+.card.done .poster{filter:grayscale(.85) brightness(.7)}
+.card.done .poster::before{content:"✓";position:absolute;z-index:3;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;
+  background:var(--solid);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:600}
+.card.flash .poster{outline-color:var(--accent)}
+@media (hover:hover){.out:not(.list) .card:hover .poster{transform:translateY(-3px)}}
+.info{display:grid;gap:1px;font-size:13px;min-width:0;flex:1;align-content:start}
+.info .name{font-size:13px;font-weight:500;color:var(--fg);line-height:1.4;margin:0;overflow-wrap:anywhere}
+.info .meta{color:var(--muted);font-size:12px}
+.info .note{color:var(--gold);font-size:12px;line-height:1.45;margin-top:2px}
+.pl{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500;justify-self:start;padding-block:5px}
+.pl:hover{text-decoration:underline}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;padding:1px 6px;border-radius:3px;background:var(--chip);color:var(--muted);margin-right:5px;vertical-align:1px;font-weight:400}
+.tag.up{background:var(--solid);color:#fff}
+.seen{position:relative;flex:none;display:flex;align-items:center;justify-content:center;gap:7px;min-height:40px;border:1px solid var(--line);border-radius:8px;
+  background:var(--surface);color:var(--fg);font-size:13px;font-weight:500;cursor:pointer;user-select:none;-webkit-user-select:none}
+.seen:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.seen .box{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font-size:11px;line-height:1;color:transparent}
+.card.done .seen{background:var(--solid);border-color:var(--solid);color:#fff}
+.card.done .seen .box{border-color:#fff;color:#fff}
+.seen.na{border-style:dashed;background:none;color:var(--muted);cursor:default;font-weight:400}
 
+/* ---- list view ---- */
+.out.list .grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:0 28px}
+.out.list .card{display:grid;grid-template-columns:60px minmax(0,1fr) 44px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.out.list .poster{border-radius:4px;box-shadow:none}
+.out.list .ptxt,.out.list .ptype,.out.list .poster.coming::after{display:none}
+.out.list .pno,.out.list .poster.has-img .pno{top:4px;left:4px;font-size:9px;letter-spacing:0;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:0 4px;border-radius:3px}
+.out.list .card.done .poster::before{display:none}
+.out.list .card.done .name{color:var(--muted)}
+.out.list .seen{width:44px;height:44px;min-height:0;border-radius:50%}
+.out.list .seen .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.out.list .seen .box{width:auto;height:auto;border:0;font-size:18px;color:var(--muted);opacity:.55}
+.out.list .card.done .seen .box{opacity:1}
+.out.list .card.done .seen .box{color:#fff}
+.out.list .seen.na{visibility:hidden}
+
+.empty{padding:56px 0 24px;text-align:center;color:var(--muted);display:grid;gap:12px;justify-items:center}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:grid;gap:6px;max-width:80ch}
+
+/* ---- phones ---- */
+@media (max-width:640px){
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px;padding-block:2px}
+  .chips::-webkit-scrollbar{display:none}
+  /* bar bleeds to the screen edges so scrolled content never peeks out beside it */
+  .bar{margin-inline:-16px;padding-inline:16px}
+}
+@media (max-width:520px){
+  header.top{padding-block:20px 4px}
+  .lg{display:none}
+  .tabs a{padding:0 13px;min-height:38px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+  section.band{padding-top:28px}
+  .s-xl{font-size:1.8rem}.s-lg{font-size:1.4rem}.s-md{font-size:1.1rem}.s-sm{font-size:.92rem}
+  .seen{min-height:44px}
+  .keybox .btn{flex:1}
+}
+@media (max-width:350px){.progress .pct{display:none}.bar{gap:6px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">Marvel Cinematic Universe · อัปเดต พ.ย. 2026</div>
+    <div class="toprow">
+      <div class="eyebrow">Marvel Cinematic Universe · อัปเดต พ.ย. 2026</div>
+      <button class="iconbtn" id="themebtn" type="button" aria-label="สลับธีมสว่าง/มืด" title="สลับธีมสว่าง/มืด">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+      </button>
+    </div>
     <h1>ลำดับดู <span>MCU</span> ทุกเรื่อง</h1>
-    <p class="lede">ภาพยนตร์ ซีรีส์ และตอนพิเศษทั้งหมด สลับดูได้ 2 แบบ: เรียงตามเหตุการณ์ในเนื้อเรื่อง หรือเรียงตามวันที่ฉายจริง ติ๊ก "ดูแล้ว" ไว้ได้ เบราว์เซอร์จะจำให้</p>
+    <p class="lede">ภาพยนตร์ ซีรีส์ และตอนพิเศษทั้งหมด สลับดูได้ 2 แบบ: เรียงตามเหตุการณ์ในเนื้อเรื่อง หรือเรียงตามวันที่ฉายจริง กด "ดูแล้ว" ไว้ได้ เบราว์เซอร์จะจำให้</p>
   </header>
 
   <div class="bar">
     <nav class="tabs" aria-label="รูปแบบการเรียง">
-      <a href="#timeline" id="tab-timeline">ตามไทม์ไลน์</a>
-      <a href="#release" id="tab-release">ตามปีที่ฉาย</a>
+      <a href="#timeline" id="tab-timeline"><span class="lg">ตาม</span>ไทม์ไลน์</a>
+      <a href="#release" id="tab-release"><span class="lg">ตาม</span>ปีที่ฉาย</a>
     </nav>
-    <label class="toggle"><input type="checkbox" id="hideopt"> ซ่อนเรื่องเสริม</label>
-    <div class="progress"><span id="prog">ดูแล้ว 0/0</span><div class="meter"><i id="meter"></i></div></div>
+    <div class="progress" aria-live="polite"><span class="lg">ดูแล้ว </span><b id="progn">0/0</b><span class="pct" id="progp"></span></div>
+    <button class="iconbtn" id="totop" type="button" aria-label="กลับขึ้นบนสุด" title="กลับขึ้นบนสุด">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
   </div>
 
-  <form class="keybox" id="keyform">
-    <label for="tmdbkey">TMDB API key</label>
-    <input type="password" id="tmdbkey" autocomplete="off" placeholder="วาง API Key หรือ Read Access Token">
-    <button type="submit">โหลดโปสเตอร์</button>
-    <button type="button" id="clearkey">ล้าง key</button>
-    <span id="keystat"></span>
-  </form>
-  <p class="viewnote" id="viewnote"></p>
-  <div class="legend">
-    <span><span class="tag">FILM</span>ภาพยนตร์</span>
-    <span><span class="tag">SERIES</span>ซีรีส์</span>
-    <span><span class="tag">SPECIAL</span>ตอนพิเศษ / One-Shot</span>
-    <span><span class="tag">MULTIVERSE</span>จักรวาลคู่ขนาน ไม่กระทบเรื่องหลัก</span>
-    <span><span class="tag up">COMING</span>ยังไม่ฉาย</span>
+  <div class="controls">
+    <div class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="search" id="q" placeholder="ค้นหาชื่อเรื่อง เช่น Thor, Loki" aria-label="ค้นหาชื่อเรื่อง" autocomplete="off" enterkeyhint="search">
+    </div>
+    <div class="chips" id="types" role="group" aria-label="กรองตามประเภท">
+      <button class="chip" type="button" data-type="" aria-pressed="true">ทั้งหมด <span class="n"></span></button>
+      <button class="chip" type="button" data-type="m" aria-pressed="false">ภาพยนตร์ <span class="n"></span></button>
+      <button class="chip" type="button" data-type="s" aria-pressed="false">ซีรีส์ <span class="n"></span></button>
+      <button class="chip" type="button" data-type="x" aria-pressed="false">ตอนพิเศษ <span class="n"></span></button>
+      <button class="chip" type="button" data-type="v" aria-pressed="false">มัลติเวิร์ส <span class="n"></span></button>
+      <button class="chip" type="button" data-type="u" aria-pressed="false">ยังไม่ฉาย <span class="n"></span></button>
+    </div>
+    <div class="chips" role="group" aria-label="ตัวเลือกการแสดงผล">
+      <div class="seg" role="group" aria-label="มุมมอง">
+        <button type="button" data-view="grid" aria-pressed="true">โปสเตอร์</button>
+        <button type="button" data-view="list" aria-pressed="false">รายการ</button>
+      </div>
+      <label class="chip"><input class="sr" type="checkbox" id="hideopt">ซ่อนเรื่องเสริม</label>
+      <label class="chip"><input class="sr" type="checkbox" id="hideseen">ซ่อนที่ดูแล้ว</label>
+      <select class="chip" id="jump" aria-label="ข้ามไปยังช่วง"><option value="">ข้ามไปที่…</option></select>
+      <button class="chip" type="button" id="setbtn" aria-expanded="false" aria-controls="setpanel">ตั้งค่า · โปสเตอร์จริง</button>
+    </div>
+    <div class="panel" id="setpanel" hidden>
+      <p>ใส่ TMDB API key ของคุณเองเพื่อโหลดโปสเตอร์จริงมาแทนการ์ดที่ออกแบบไว้ (ไม่บังคับ) ขอ key ฟรีได้ที่ <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">themoviedb.org</a> key จะเก็บอยู่ในเบราว์เซอร์นี้เท่านั้น</p>
+      <form class="keybox" id="keyform">
+        <label for="tmdbkey">TMDB API key</label>
+        <input type="password" id="tmdbkey" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="วาง API Key หรือ Read Access Token">
+        <button class="btn primary" type="submit">โหลดโปสเตอร์</button>
+        <button class="btn" type="button" id="clearkey">ล้าง key</button>
+      </form>
+      <p id="keystat" role="status"></p>
+      <button class="btn quiet" type="button" id="resetseen">ล้างเครื่องหมาย "ดูแล้ว" ทั้งหมด</button>
+    </div>
+    <p class="viewnote" id="viewnote"></p>
+    <button class="next" id="next" type="button"><span class="lab" id="nextlab">ดูต่อ</span><span class="t" id="nextt"></span><span class="go">ไปที่เรื่องนี้ ↓</span></button>
   </div>
 
-  <main id="out"></main>
+  <main id="out" class="out"></main>
+  <div class="empty" id="empty" hidden>
+    <div>ไม่พบเรื่องที่ตรงกับตัวกรองตอนนี้</div>
+    <button class="btn" type="button" id="clearfilters">ล้างตัวกรอง</button>
+  </div>
 
   <footer>
-    <div>ลำดับตามไทม์ไลน์ยึดตาม Timeline order ของ Marvel Studios บน Disney+ เรื่องใน Phase 5–6 บางเรื่อง Marvel ยังไม่ระบุปีชัดเจน แต่ละแหล่งจึงอาจสลับกันเล็กน้อย</div>
+    <div><span class="tag">เสริม</span>ข้ามได้ ไม่กระทบเนื้อเรื่องหลัก · <span class="tag">MULTIVERSE</span>จักรวาลคู่ขนาน · <span class="tag up">COMING</span>ยังไม่ฉาย (วันฉายอาจเลื่อนได้)</div>
+    <div>ลำดับตามไทม์ไลน์ยึดตาม Timeline order ของ Marvel Studios บน Disney+ เรื่องใน Phase 5–6 บางเรื่อง Marvel ยังไม่ระบุปีชัดเจน แต่ละแหล่งจึงอาจสลับกันเล็กน้อย วันฉายเป็นวันฉายในสหรัฐฯ</div>
     <div>ซีรีส์ Netflix (Daredevil, Jessica Jones, Luke Cage, Iron Fist, The Defenders, The Punisher) ไม่ได้ใส่ไว้ ส่วน Agents of S.H.I.E.L.D. และ Agent Carter ไม่อยู่ในไทม์ไลน์ทางการ</div>
     <div>โปสเตอร์ดึงผ่าน TMDB API เมื่อใส่ API key ถ้าเรื่องไหนหาไม่เจอจะแสดงการ์ดที่ออกแบบไว้แทน</div>
-    <div>This product uses the TMDB API but is not endorsed or certified by TMDB.</div>
+    <div>This product uses the TMDB API but is not endorsed or certified by TMDB. Marvel and all related titles are trademarks of their respective owners. Non-commercial fan project.</div>
   </footer>
 </div>
 
@@ -144,7 +277,8 @@ const FAM={
   dp:['#6B1418','#F2D04A'], f4:['#1A3A6A','#EAF0F7'], other:['#2D3D52','#F0C35A'], multi:['#30333A','#E8833F']
 };
 const TYPE={m:['FILM','ภาพยนตร์'],s:['SERIES','ซีรีส์'],x:['SPECIAL','ตอนพิเศษ'],v:['MULTIVERSE','มัลติเวิร์ส'],u:['COMING','ยังไม่ฉาย']};
-// [id, title|season, family, type, release, setting, optional, note]
+// [id, title|season, family, type, US release date, setting, optional, note]
+// "ยังไม่ฉาย" is derived from the release date, so nothing needs editing when a title comes out.
 const D=[
 ['@','อดีต: ก่อนยุค Avengers','ยุคโบราณ – 1995'],
 ['ew','Eyes of Wakanda|1','wakanda','s','2025-08-01','ยุคโบราณ',1],
@@ -221,31 +355,50 @@ const D=[
 ['pun','The Punisher: One Last Kill','street','x','2026-05-12','ก่อน Brand New Day',1],
 ['sm4','Spider-Man: Brand New Day','spider','m','2026-07-31','2028'],
 ['vq','VisionQuest','mystic','s','2026-10-14','ต่อจาก WandaVision'],
-['avd','Avengers: Doomsday','avengers','u','2026-12-18','ยังไม่เปิดเผย'],
-['avs','Avengers: Secret Wars','avengers','u','2027-12-17','ต่อจาก Doomsday'],
+['avd','Avengers: Doomsday','avengers','m','2026-12-18','ยังไม่เปิดเผย'],
+['avs','Avengers: Secret Wars','avengers','m','2027-12-17','ต่อจาก Doomsday'],
 ['@','จักรวาลแยก','อยู่นอกไทม์ไลน์หลัก ข้ามได้'],
 ['x97a',"X-Men '97|1",'multi','v','2024-03-20','จักรวาลของตัวเอง',1],
 ['x97b',"X-Men '97|2",'multi','v','2026-07-01','จักรวาลของตัวเอง',1],
-['yfns','Your Friendly Neighborhood Spider-Man|1','multi','v','2025-01-29','จักรวาลของตัวเอง',1]
+['yfns','Your Friendly Neighborhood Spider-Man|1','multi','v','2025-01-29','จักรวาลของตัวเอง',1],
+['yfns2','Your Friendly Neighborhood Spider-Man|2','multi','v','2027-01-13','จักรวาลของตัวเอง',1]
 ];
 const TH_M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
 const fmt=s=>{const [y,m,d]=s.split('-').map(Number);return `${d} ${TH_M[m-1]} ${y}`};
-const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const NOW=new Date();
+const TODAY=`${NOW.getFullYear()}-${pad(NOW.getMonth()+1)}-${pad(NOW.getDate())}`;
+const daysTo=s=>{const [y,m,d]=s.split('-').map(Number);return Math.round((new Date(y,m-1,d)-new Date(NOW.getFullYear(),NOW.getMonth(),NOW.getDate()))/864e5)};
+const store={
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
 
-const items=[];let era=null;
+const items=[],byId={};let era=null;
 D.forEach(r=>{
   if(r[0]==='@'){era={name:r[1],span:r[2]};return}
   const [title,season]=r[1].split('|');
-  items.push({id:r[0],title,season,fam:r[2],type:r[3],rel:r[4],set:r[5],opt:!!r[6],note:r[7]||'',era});
+  const it={id:r[0],title,season,fam:r[2],type:r[3],rel:r[4],set:r[5],opt:!!r[6],note:r[7]||'',era,coming:r[4]>TODAY};
+  it.name=title+(season?` ซีซัน ${season}`:'');
+  it.search=`${title} ${season?'season '+season+' ซีซัน '+season:''} ${TYPE[it.type][1]}`.toLowerCase();
+  items.push(it);byId[it.id]=it;
 });
 
+// ---- state ----
 let seen=new Set();
-try{seen=new Set(JSON.parse(localStorage.getItem('mcu-seen')||'[]'))}catch(e){}
-const save=()=>{try{localStorage.setItem('mcu-seen',JSON.stringify([...seen]))}catch(e){}};
-let hideOpt=false;
-try{hideOpt=localStorage.getItem('mcu-hideopt')==='1'}catch(e){}
-document.getElementById('hideopt').checked=hideOpt;
+try{seen=new Set(JSON.parse(store.get('mcu-seen')||'[]').filter(id=>byId[id]))}catch(e){}
+const save=()=>store.set('mcu-seen',JSON.stringify([...seen]));
+let hideOpt=store.get('mcu-hideopt')==='1';
+let hideSeen=store.get('mcu-hideseen')==='1';
+let view=store.get('mcu-view')==='list'?'list':'grid';
+let typeF='';
+let groups=[];
+const out=$('out'),qEl=$('q');
 
+// ---- cards ----
 function motif(t,ac,seed){
   const r=n=>((seed*9301+n*49297)%233280)/233280;
   if(t==='m') return `<circle cx="${140+r(1)*30}" cy="${80+r(2)*40}" r="${62+r(3)*18}" fill="${ac}" opacity=".9"/><circle cx="${60}" cy="${150}" r="96" fill="none" stroke="${ac}" stroke-width="1" opacity=".35"/>`;
@@ -262,69 +415,175 @@ function poster(it,no,yearLabel){
   if(it.season) kick=(kick?kick+' · ':'')+'Season '+it.season;
   const L=big.length, sz=L<=8?'s-xl':L<=14?'s-lg':L<=24?'s-md':'s-sm';
   const seed=[...it.id].reduce((a,c)=>a+c.charCodeAt(0),0);
-  const ac2=it.type==='u'?'#E9E6DF':ac;
-  return `<div class="poster${it.type==='u'?' coming':''}" style="--pbg:${bg};--pac:${ac2}">
-<svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${motif(it.type,ac2,seed)}</svg>
-<span class="pno">No.${String(no).padStart(2,'0')}</span><span class="ptype">${TYPE[it.type][0]}</span>
-<div class="ptxt">${kick?`<span class="pkick">${esc(kick)}</span>`:''}<h3 class="ptitle ${sz}">${esc(big)}</h3>
+  const ac2=it.coming?'#E9E6DF':ac, t=it.coming?'u':it.type;
+  return `<div class="poster${it.coming?' coming':''}" style="--pbg:${bg};--pac:${ac2}" aria-hidden="true">
+<svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice">${motif(t,ac2,seed)}</svg>
+<span class="pno">No.${pad(no)}</span><span class="ptype">${TYPE[t][0]}</span>
+<div class="ptxt">${kick?`<span class="pkick">${esc(kick)}</span>`:''}<div class="ptitle ${sz}">${esc(big)}</div>
 <div class="pfoot"><span>MARVEL STUDIOS</span><span>${yearLabel}</span></div></div></div>`;
 }
 function card(it,no,mode){
   const done=seen.has(it.id);
-  const tag=it.type==='u'?'<span class="tag up">COMING</span>':it.opt?'<span class="tag">เสริม</span>':'';
-  const name=it.title+(it.season?` ซีซัน ${it.season}`:'');
-  const relTxt=it.type==='u'?`เข้าฉาย ${fmt(it.rel)}`:`ฉาย ${fmt(it.rel)}`;
-  const meta=mode==='timeline'?`${TYPE[it.type][1]} · เนื้อเรื่อง ${it.set}<br>${relTxt}`:`${TYPE[it.type][1]} · ${relTxt}<br>เนื้อเรื่อง ${it.set}`;
+  const tag=it.coming?'<span class="tag up">COMING</span>':it.opt?'<span class="tag">เสริม</span>':'';
+  const d=it.coming?daysTo(it.rel):0;
+  const relTxt=it.coming?`เข้าฉาย ${fmt(it.rel)}${d>0?` (อีก ${d} วัน)`:''}`:`ฉาย ${fmt(it.rel)}`;
+  const kind=TYPE[it.type][1];
+  const meta=mode==='timeline'?`${kind} · เนื้อเรื่อง ${it.set}<br>${relTxt}`:`${kind} · ${relTxt}<br>เนื้อเรื่อง ${it.set}`;
   const year=mode==='timeline'?it.set.match(/\d{4}/)?.[0]||'—':it.rel.slice(0,4);
+  const link=`https://www.themoviedb.org/search?query=${encodeURIComponent(it.title.replace(/^One-Shot: /,'Marvel One-Shot '))}`;
+  const act=it.coming
+    ?'<span class="seen na">ยังไม่ฉาย</span>'
+    :`<label class="seen"><input class="sr" type="checkbox" ${done?'checked':''} aria-label="ดูแล้ว: ${esc(it.name)}"><span class="box" aria-hidden="true">✓</span><span class="lbl" aria-hidden="true">ดูแล้ว</span></label>`;
   return `<article class="card${done?' done':''}" data-id="${it.id}">${poster(it,no,year)}
-<div class="info"><div class="name">${tag}${esc(name)}</div><div class="meta">${meta}</div>
+<div class="info"><h3 class="name">${tag}${esc(it.name)}</h3><div class="meta">${meta}</div>
 ${it.note?`<div class="note">${it.note}</div>`:''}
-<div class="acts">${it.type!=='u'?`<label class="seen"><input type="checkbox" id="seen-${it.id}" ${done?'checked':''}> ดูแล้ว</label>`:''}<a class="pl" href="https://www.themoviedb.org/search?query=${encodeURIComponent(it.title.replace(/^One-Shot: /,'Marvel One-Shot '))}" target="_blank" rel="noopener">ดูโปสเตอร์จริง ↗</a></div></div></article>`;
+<a class="pl" href="${link}" target="_blank" rel="noopener" aria-label="ดู ${esc(it.name)} บน TMDB">ดูบน TMDB ↗</a></div>
+${act}</article>`;
 }
-function bands(mode){
-  const vis=items.filter(i=>!(hideOpt&&i.opt));
-  let groups=[];
-  if(mode==='timeline'){
-    vis.forEach(i=>{let g=groups[groups.length-1];if(!g||g.key!==i.era){g={key:i.era,name:i.era.name,span:i.era.span,list:[]};groups.push(g)}g.list.push(i)});
-  }else{
-    [...vis].sort((a,b)=>a.rel.localeCompare(b.rel)).forEach(i=>{const y=i.rel.slice(0,4);let g=groups[groups.length-1];
-      if(!g||g.key!==y){g={key:y,name:'ปี '+y,span:'',list:[]};groups.push(g)}g.list.push(i)});
-    groups.forEach(g=>{const f=g.list.filter(i=>i.type==='m').length,s=g.list.length-f;g.span=`ภาพยนตร์ ${f} · อื่นๆ ${s}`});
-  }
-  let n=0;
-  return groups.map(g=>`<section class="band"><div class="bandhead"><h2>${g.name}</h2><span class="span">${g.span}</span><span class="cnt">${g.list.length} เรื่อง</span></div>
-<div class="grid">${g.list.map(i=>card(i,++n,mode)).join('')}</div></section>`).join('');
+
+// ---- order & grouping ----
+function mode(){return location.hash==='#release'?'release':'timeline'}
+function ordered(m){
+  const base=items.filter(i=>!(hideOpt&&i.opt));
+  return m==='release'?[...base].sort((a,b)=>a.rel.localeCompare(b.rel)):base;
+}
+function group(list,m){
+  const gs=[];
+  list.forEach(i=>{
+    const key=m==='timeline'?i.era:i.rel.slice(0,4);
+    let g=gs[gs.length-1];
+    if(!g||g.key!==key){g=m==='timeline'?{key,name:i.era.name,span:i.era.span,list:[]}:{key,name:'ปี '+key,span:'',list:[]};gs.push(g)}
+    g.list.push(i);
+  });
+  if(m==='release')gs.forEach(g=>{const f=g.list.filter(i=>i.type==='m').length;g.span=`ภาพยนตร์ ${f} · อื่นๆ ${g.list.length-f}`});
+  return gs;
 }
 const NOTES={
   timeline:'เรียงตามเหตุการณ์ที่เกิดในเรื่อง เหมาะกับการดูรอบสอง ถ้าดูครั้งแรก แนะนำแบบ "ตามปีที่ฉาย" เพราะบางเรื่อง เช่น Captain Marvel จะเฉลยของที่หนังภาคหลังตั้งใจเปิดเผย',
   release:'เรียงตามวันฉายจริงในสหรัฐฯ เป็นลำดับที่ผู้สร้างตั้งใจให้ดู ฉากหลังเครดิตและการเฉลยต่างๆ จะลงตัวที่สุด เหมาะกับการดูครั้งแรก'
 };
-function mode(){return location.hash==='#release'?'release':'timeline'}
 function render(){
-  const m=mode();
-  ['timeline','release'].forEach(k=>{const t=document.getElementById('tab-'+k);k===m?t.setAttribute('aria-current','page'):t.removeAttribute('aria-current')});
-  document.getElementById('viewnote').textContent=NOTES[m];
-  document.getElementById('out').innerHTML=bands(m);
+  const m=mode(),list=ordered(m);
+  groups=group(list,m);
+  ['timeline','release'].forEach(k=>{const t=$('tab-'+k);k===m?t.setAttribute('aria-current','page'):t.removeAttribute('aria-current')});
+  $('viewnote').textContent=NOTES[m];
+  let n=0;
+  out.innerHTML=groups.map((g,gi)=>`<section class="band" id="band-${gi}"><div class="bandhead"><h2>${esc(g.name)}</h2><span class="span">${esc(g.span)}</span><span class="cnt"></span></div>
+<div class="grid">${g.list.map(i=>card(i,++n,m)).join('')}</div></section>`).join('');
+  $('jump').innerHTML='<option value="">ข้ามไปที่…</option>'+groups.map((g,gi)=>`<option value="${gi}">${esc(g.name)}</option>`).join('');
+  document.querySelectorAll('#types .chip').forEach(c=>{
+    const t=c.dataset.type;
+    c.querySelector('.n').textContent=list.filter(i=>!t||(t==='u'?i.coming:i.type===t)).length;
+  });
+  applyFilters();
   progress();
+  loadPosters();
+}
+function applyFilters(){
+  const q=qEl.value.trim().toLowerCase();
+  let shown=0;
+  groups.forEach((g,gi)=>{
+    const band=$('band-'+gi);let n=0;
+    band.querySelectorAll('.card').forEach(c=>{
+      const it=byId[c.dataset.id];
+      const ok=(!typeF||(typeF==='u'?it.coming:it.type===typeF))&&(!q||it.search.includes(q))&&!(hideSeen&&seen.has(it.id));
+      c.hidden=!ok;if(ok)n++;
+    });
+    band.hidden=!n;shown+=n;
+    $('jump').options[gi+1].disabled=!n;
+  });
+  $('empty').hidden=shown>0;
 }
 function progress(){
-  const pool=items.filter(i=>i.type!=='u'&&!(hideOpt&&i.opt));
+  const list=ordered(mode());
+  const pool=list.filter(i=>!i.coming);
   const c=pool.filter(i=>seen.has(i.id)).length;
-  document.getElementById('prog').textContent=`ดูแล้ว ${c}/${pool.length}`;
-  document.getElementById('meter').style.width=(pool.length?Math.round(c/pool.length*100):0)+'%';
+  const pct=pool.length?Math.round(c/pool.length*100):0;
+  $('progn').textContent=`${c}/${pool.length}`;
+  $('progp').textContent=` · ${pct}%`;
+  $('meter').style.width=pct+'%';
+  groups.forEach((g,gi)=>{
+    const w=g.list.filter(i=>!i.coming),s=w.filter(i=>seen.has(i.id)).length;
+    const el=document.querySelector(`#band-${gi} .cnt`);
+    if(el)el.textContent=w.length?`ดูแล้ว ${s}/${w.length}`:`ยังไม่ฉาย ${g.list.length} เรื่อง`;
+  });
+  const idx=list.findIndex(i=>!i.coming&&!seen.has(i.id));
+  const btn=$('next');
+  if(idx<0){btn.disabled=true;btn.dataset.id='';$('nextlab').textContent='ครบแล้ว';$('nextt').textContent='ดูครบทุกเรื่องที่ฉายแล้ว'}
+  else{btn.disabled=false;btn.dataset.id=list[idx].id;$('nextlab').textContent=c?'ดูต่อ':'เริ่มที่';$('nextt').textContent=`No.${pad(idx+1)} · ${list[idx].name}`}
 }
-document.getElementById('out').addEventListener('change',e=>{
+function setType(t){
+  typeF=t;
+  document.querySelectorAll('#types .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.type===t)));
+}
+function setView(v){
+  view=v;out.classList.toggle('list',v==='list');
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));
+}
+const syncChip=el=>el.closest('.chip').classList.toggle('on',el.checked);
+
+// ---- events ----
+out.addEventListener('change',e=>{
   const cb=e.target.closest('.seen input');if(!cb)return;
-  const card=cb.closest('.card'),id=card.dataset.id;
-  cb.checked?seen.add(id):seen.delete(id);card.classList.toggle('done',cb.checked);save();progress();
+  const c=cb.closest('.card'),id=c.dataset.id;
+  cb.checked?seen.add(id):seen.delete(id);c.classList.toggle('done',cb.checked);save();progress();
+  if(hideSeen)applyFilters();
 });
-document.getElementById('hideopt').addEventListener('change',e=>{hideOpt=e.target.checked;try{localStorage.setItem('mcu-hideopt',hideOpt?'1':'0')}catch(err){}render()});
+$('hideopt').checked=hideOpt;syncChip($('hideopt'));
+$('hideopt').addEventListener('change',e=>{hideOpt=e.target.checked;syncChip(e.target);store.set('mcu-hideopt',hideOpt?'1':'0');render()});
+$('hideseen').checked=hideSeen;syncChip($('hideseen'));
+$('hideseen').addEventListener('change',e=>{hideSeen=e.target.checked;syncChip(e.target);store.set('mcu-hideseen',hideSeen?'1':'0');applyFilters()});
+$('types').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;setType(c.dataset.type);applyFilters()});
+qEl.addEventListener('input',applyFilters);
+qEl.addEventListener('keydown',e=>{if(e.key==='Enter')qEl.blur()});
+document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;setView(b.dataset.view);store.set('mcu-view',view)});
+$('jump').addEventListener('change',e=>{
+  const b=$('band-'+e.target.value);e.target.value='';
+  if(b)b.scrollIntoView({block:'start'});
+});
+$('clearfilters').addEventListener('click',()=>{
+  qEl.value='';setType('');
+  if(hideSeen){hideSeen=false;$('hideseen').checked=false;syncChip($('hideseen'));store.set('mcu-hideseen','0')}
+  applyFilters();
+});
+$('next').addEventListener('click',()=>{
+  const id=$('next').dataset.id;if(!id)return;
+  let c=out.querySelector(`.card[data-id="${id}"]`);if(!c)return;
+  if(c.hidden){qEl.value='';setType('');applyFilters()}
+  c.scrollIntoView({block:'center'});
+  c.classList.add('flash');setTimeout(()=>c.classList.remove('flash'),1800);
+});
+$('setbtn').addEventListener('click',()=>{
+  const p=$('setpanel'),open=p.hidden;
+  p.hidden=!open;$('setbtn').setAttribute('aria-expanded',String(open));
+});
+$('resetseen').addEventListener('click',()=>{
+  if(!seen.size||!confirm('ล้างเครื่องหมาย "ดูแล้ว" ทั้งหมด?'))return;
+  seen.clear();save();render();
+});
+$('totop').addEventListener('click',()=>window.scrollTo({top:0}));
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{$('totop').classList.toggle('on',window.scrollY>500);ticking=false});
+},{passive:true});
+// theme
+const mqDark=window.matchMedia('(prefers-color-scheme: dark)');
+const isDark=()=>{const t=document.documentElement.getAttribute('data-theme');return t?t==='dark':mqDark.matches};
+const syncThemeColor=()=>$('themecolor').setAttribute('content',isDark()?'#0E1014':'#F1F2F5');
+$('themebtn').addEventListener('click',()=>{
+  const t=isDark()?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);store.set('mcu-theme',t);syncThemeColor();
+});
+if(mqDark.addEventListener)mqDark.addEventListener('change',syncThemeColor);
+syncThemeColor();
+
 // ---- TMDB posters ----
-const IMG='https://image.tmdb.org/t/p/w342';
-let KEY='';try{KEY=localStorage.getItem('mcu-tmdb-key')||''}catch(e){}
-let PC={};try{PC=JSON.parse(localStorage.getItem('mcu-tmdb-posters')||'{}')}catch(e){}
-const savePC=()=>{try{localStorage.setItem('mcu-tmdb-posters',JSON.stringify(PC))}catch(e){}};
-const keystat=t=>document.getElementById('keystat').textContent=t;
+const IMG='https://image.tmdb.org/t/p/';
+let KEY=store.get('mcu-tmdb-key')||'';
+let PC={};try{PC=JSON.parse(store.get('mcu-tmdb-posters')||'{}')||{}}catch(e){}
+const savePC=()=>store.set('mcu-tmdb-posters',JSON.stringify(PC));
+const keystat=t=>$('keystat').textContent=t;
 // a few titles need a clearer search term on TMDB
 const QUERY={osac:'Marvel One-Shot: Agent Carter',osft:"Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",
   osc:'Marvel One-Shot: The Consultant',os47:'Marvel One-Shot: Item 47',osk:'Marvel One-Shot: All Hail the King',
@@ -339,6 +598,12 @@ async function api(path,params){
   if(!r.ok)throw new Error('http '+r.status);
   return r.json();
 }
+const norm=s=>(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+// prefer an exact title match over whatever TMDB happens to rank first
+function pick(results,q){
+  const w=(results||[]).filter(r=>r.poster_path),n=norm(q);
+  return w.find(r=>norm(r.title||r.name)===n)||w.find(r=>norm(r.original_title||r.original_name)===n)||w[0];
+}
 async function findPoster(it){
   const q=QUERY[it.id]||it.title;
   const yr=it.rel.slice(0,4);
@@ -348,7 +613,7 @@ async function findPoster(it){
     :[['search/movie',{query:q,primary_release_year:yr}],['search/movie',{query:q}],['search/tv',{query:q}]];
   for(const [p,params] of tries){
     const j=await api(p,params);
-    const hit=(j.results||[]).find(r=>r.poster_path);
+    const hit=pick(j.results,q);
     if(!hit)continue;
     if(p==='search/tv'&&it.season){
       try{const s=await api(`tv/${hit.id}/season/${it.season}`);if(s.poster_path)return s.poster_path}catch(e){if(e.message==='auth')throw e}
@@ -359,49 +624,64 @@ async function findPoster(it){
 }
 function paint(id){
   const p=PC[id];if(!p)return;
-  const card=document.querySelector(`.card[data-id="${id}"] .poster`);if(!card||card.classList.contains('has-img'))return;
-  const img=new Image();img.className='real';img.alt='';img.loading='lazy';img.src=IMG+p;
-  img.onload=()=>card.classList.add('has-img');
-  card.prepend(img);
+  const box=out.querySelector(`.card[data-id="${id}"] .poster`);if(!box||box.querySelector('img.real'))return;
+  const img=new Image();img.className='real';img.alt='';img.loading='lazy';img.decoding='async';
+  img.onload=()=>box.classList.add('has-img');
+  img.onerror=()=>img.remove();
+  box.prepend(img);
+  img.sizes='(max-width:520px) 46vw, 190px';
+  img.srcset=`${IMG}w185${p} 185w, ${IMG}w342${p} 342w, ${IMG}w500${p} 500w`;
+  img.src=IMG+'w342'+p;
 }
-let running=false;
+let running=false,gen=0;
 async function loadPosters(){
   Object.keys(PC).forEach(paint);
   if(!KEY||running)return;
   const todo=items.filter(i=>!(i.id in PC));
   if(!todo.length){keystat('โหลดโปสเตอร์ครบแล้ว');return}
-  running=true;let done=0;keystat(`กำลังโหลด 0/${todo.length}`);
+  const g=++gen;
+  running=true;let done=0,failed=0;keystat(`กำลังโหลด 0/${todo.length}`);
   const q=[...todo];
   async function worker(){
-    while(q.length){
-      const it=q.shift();
-      try{PC[it.id]=await findPoster(it)}catch(e){
-        if(e.message==='auth'){q.length=0;keystat('API key ไม่ถูกต้อง ลองตรวจอีกครั้ง');running=false;return}
-        continue;
+    while(q.length&&g===gen){
+      const it=q.shift();let path;
+      try{path=await findPoster(it)}catch(e){
+        if(e.message==='auth'){q.length=0;if(g===gen){gen++;keystat('API key ไม่ถูกต้อง ลองตรวจอีกครั้ง')}return}
+        failed++;continue;
       }
-      savePC();paint(it.id);done++;keystat(`กำลังโหลด ${done}/${todo.length}`);
+      if(g!==gen)return;
+      PC[it.id]=path;savePC();paint(it.id);done++;keystat(`กำลังโหลด ${done}/${todo.length}`);
     }
   }
   await Promise.all([worker(),worker(),worker(),worker()]);
-  if(running){const miss=items.filter(i=>!PC[i.id]).length;keystat(miss?`เสร็จแล้ว หาไม่เจอ ${miss} เรื่อง`:'โหลดโปสเตอร์ครบแล้ว')}
+  if(g===gen){
+    const miss=items.filter(i=>!PC[i.id]).length;
+    keystat(failed?`โหลดไม่สำเร็จ ${failed} เรื่อง (เครือข่ายมีปัญหา) กด "โหลดโปสเตอร์" เพื่อลองใหม่`:miss?`เสร็จแล้ว หาไม่เจอ ${miss} เรื่อง`:'โหลดโปสเตอร์ครบแล้ว');
+  }
   running=false;
 }
-document.getElementById('tmdbkey').value=KEY;
-document.getElementById('keyform').addEventListener('submit',e=>{
+$('tmdbkey').value=KEY;
+$('keyform').addEventListener('submit',e=>{
   e.preventDefault();
-  KEY=document.getElementById('tmdbkey').value.trim();
+  KEY=$('tmdbkey').value.trim();
   if(!KEY){keystat('วาง API key ก่อน');return}
-  try{localStorage.setItem('mcu-tmdb-key',KEY)}catch(err){}
+  store.set('mcu-tmdb-key',KEY);
   Object.keys(PC).forEach(k=>{if(PC[k]===null)delete PC[k]});
   loadPosters();
 });
-document.getElementById('clearkey').addEventListener('click',()=>{
-  KEY='';PC={};document.getElementById('tmdbkey').value='';
-  try{localStorage.removeItem('mcu-tmdb-key');localStorage.removeItem('mcu-tmdb-posters')}catch(e){}
-  keystat('ล้างแล้ว');render();
+$('clearkey').addEventListener('click',()=>{
+  gen++;running=false;KEY='';PC={};$('tmdbkey').value='';
+  store.del('mcu-tmdb-key');store.del('mcu-tmdb-posters');
+  render();keystat('ล้างแล้ว');
 });
-const _render=render;
-render=function(){_render();loadPosters()};
-window.addEventListener('hashchange',render);
+
+window.addEventListener('hashchange',()=>{
+  render();
+  const top=out.getBoundingClientRect().top+window.scrollY-76;
+  if(window.scrollY>top)window.scrollTo({top});
+});
+setView(view);
 render();
 </script>
+</body>
+</html>
