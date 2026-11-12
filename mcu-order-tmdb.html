@@ -1,0 +1,407 @@
+<title>ลำดับดู MCU</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: archive wall — era/year bands, each a wrapping grid of 2:3 poster cards */
+:root{
+  --bg:#F1F2F5; --surface:#FFFFFF; --fg:#14161B; --muted:#5A606C; --line:#D8DBE2;
+  --accent:#B3202F; --gold:#9A6B12; --chip:#E7E9EE;
+  --f-display:"Anton","Impact","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans Thai","Noto Sans Thai","Leelawadee UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1014; --surface:#171A20; --fg:#ECEEF2; --muted:#9AA1AE; --line:#2A2E37;
+  --accent:#F0505B; --gold:#E2B04A; --chip:#232731; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1014; --surface:#171A20; --fg:#ECEEF2; --muted:#9AA1AE; --line:#2A2E37;
+  --accent:#F0505B; --gold:#E2B04A; --chip:#232731; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1180px;margin:0 auto}
+header.top{padding-block:32px 8px;display:grid;gap:14px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(2.4rem,7vw,4.2rem);line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding-block:12px;margin-top:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabs{display:flex;gap:4px;background:var(--chip);padding:4px;border-radius:999px}
+.tabs a{font-weight:500;text-decoration:none;color:var(--muted);padding:7px 16px;border-radius:999px;font-size:14px}
+.tabs a[aria-current="page"]{background:var(--surface);color:var(--fg);box-shadow:0 0 0 1px var(--line)}
+.tabs a:focus-visible,.toggle input:focus-visible,.seen input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);cursor:pointer}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.progress{margin-left:auto;display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meter{width:120px;height:6px;background:var(--chip);border-radius:3px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.viewnote{font-size:13px;color:var(--muted);margin:16px 0 0;max-width:70ch}
+section.band{padding-top:36px}
+.bandhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;border-bottom:2px solid var(--fg);padding-bottom:6px;margin-bottom:18px}
+.bandhead h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem,4vw,2.2rem);margin:0;line-height:1.1;letter-spacing:.01em}
+.bandhead .span{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.bandhead .cnt{margin-left:auto;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 16px}
+.card{display:grid;gap:8px;min-width:0}
+.poster{position:relative;aspect-ratio:2/3;max-width:100%;border-radius:6px;overflow:hidden;background:var(--pbg);color:#F6F5F1;
+  box-shadow:0 1px 0 rgba(0,0,0,.08),0 6px 18px -10px rgba(0,0,0,.5);transition:transform .2s ease,filter .2s}
+.poster svg{position:absolute;inset:0;width:100%;height:100%}
+.pno{position:absolute;top:8px;left:9px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--pac)}
+.ptype{position:absolute;top:8px;right:9px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;opacity:.85}
+.ptxt{position:absolute;left:10px;right:10px;bottom:10px;display:grid;gap:2px}
+.pkick{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--pac);line-height:1.3}
+.ptitle{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.98;margin:0;letter-spacing:.01em;overflow-wrap:anywhere}
+.s-xl{font-size:2.1rem}.s-lg{font-size:1.6rem}.s-md{font-size:1.25rem}.s-sm{font-size:1.02rem}
+.pfoot{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;opacity:.8;margin-top:4px;letter-spacing:.06em}
+.poster.coming{background:repeating-linear-gradient(135deg,#24262C 0 10px,#2C2F36 10px 20px)}
+.poster.coming::after{content:"";position:absolute;inset:6px;border:1px dashed rgba(255,255,255,.35);border-radius:4px}
+.card.done .poster{filter:grayscale(.85) brightness(.7)}
+.card.done .poster::before{content:"✓";position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:600}
+.card:hover .poster{transform:translateY(-3px)}
+.info{display:grid;gap:1px;font-size:13px;min-width:0}
+.info .name{font-weight:500;color:var(--fg);line-height:1.35}
+.info .meta{color:var(--muted);font-size:12px}
+.info .note{color:var(--gold);font-size:12px;line-height:1.4;margin-top:2px}
+.seen{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;margin-top:4px;width:max-content}
+.seen input{accent-color:var(--accent)}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:4px}
+.acts .seen{margin-top:0}
+.pl{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500}
+.pl:hover{text-decoration:underline}
+.pl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;padding:1px 6px;border-radius:3px;background:var(--chip);color:var(--muted);margin-right:4px;vertical-align:1px}
+.tag.up{background:var(--accent);color:#fff}
+.keybox{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--muted)}
+.keybox label{font-family:var(--f-mono);font-size:12px}
+.keybox input{flex:1 1 240px;min-width:0;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font:inherit}
+.keybox button{padding:7px 14px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;cursor:pointer}
+.keybox button[type=submit]{background:var(--accent);border-color:var(--accent);color:#fff}
+.keybox :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.poster img.real{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.poster.has-img svg,.poster.has-img .ptxt,.poster.has-img .ptype{display:none}
+.poster.has-img .pno{z-index:2;background:rgba(0,0,0,.65);color:#fff;padding:1px 6px;border-radius:3px}
+.card.done .poster::before{z-index:3}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:14px}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:grid;gap:6px;max-width:80ch}
+@media (max-width:520px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.progress{margin-left:0;width:100%}.meter{flex:1}
+  .s-xl{font-size:1.8rem}.s-lg{font-size:1.4rem}.s-md{font-size:1.1rem}.s-sm{font-size:.92rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Marvel Cinematic Universe · อัปเดต พ.ย. 2026</div>
+    <h1>ลำดับดู <span>MCU</span> ทุกเรื่อง</h1>
+    <p class="lede">ภาพยนตร์ ซีรีส์ และตอนพิเศษทั้งหมด สลับดูได้ 2 แบบ: เรียงตามเหตุการณ์ในเนื้อเรื่อง หรือเรียงตามวันที่ฉายจริง ติ๊ก "ดูแล้ว" ไว้ได้ เบราว์เซอร์จะจำให้</p>
+  </header>
+
+  <div class="bar">
+    <nav class="tabs" aria-label="รูปแบบการเรียง">
+      <a href="#timeline" id="tab-timeline">ตามไทม์ไลน์</a>
+      <a href="#release" id="tab-release">ตามปีที่ฉาย</a>
+    </nav>
+    <label class="toggle"><input type="checkbox" id="hideopt"> ซ่อนเรื่องเสริม</label>
+    <div class="progress"><span id="prog">ดูแล้ว 0/0</span><div class="meter"><i id="meter"></i></div></div>
+  </div>
+
+  <form class="keybox" id="keyform">
+    <label for="tmdbkey">TMDB API key</label>
+    <input type="password" id="tmdbkey" autocomplete="off" placeholder="วาง API Key หรือ Read Access Token">
+    <button type="submit">โหลดโปสเตอร์</button>
+    <button type="button" id="clearkey">ล้าง key</button>
+    <span id="keystat"></span>
+  </form>
+  <p class="viewnote" id="viewnote"></p>
+  <div class="legend">
+    <span><span class="tag">FILM</span>ภาพยนตร์</span>
+    <span><span class="tag">SERIES</span>ซีรีส์</span>
+    <span><span class="tag">SPECIAL</span>ตอนพิเศษ / One-Shot</span>
+    <span><span class="tag">MULTIVERSE</span>จักรวาลคู่ขนาน ไม่กระทบเรื่องหลัก</span>
+    <span><span class="tag up">COMING</span>ยังไม่ฉาย</span>
+  </div>
+
+  <main id="out"></main>
+
+  <footer>
+    <div>ลำดับตามไทม์ไลน์ยึดตาม Timeline order ของ Marvel Studios บน Disney+ เรื่องใน Phase 5–6 บางเรื่อง Marvel ยังไม่ระบุปีชัดเจน แต่ละแหล่งจึงอาจสลับกันเล็กน้อย</div>
+    <div>ซีรีส์ Netflix (Daredevil, Jessica Jones, Luke Cage, Iron Fist, The Defenders, The Punisher) ไม่ได้ใส่ไว้ ส่วน Agents of S.H.I.E.L.D. และ Agent Carter ไม่อยู่ในไทม์ไลน์ทางการ</div>
+    <div>โปสเตอร์ดึงผ่าน TMDB API เมื่อใส่ API key ถ้าเรื่องไหนหาไม่เจอจะแสดงการ์ดที่ออกแบบไว้แทน</div>
+    <div>This product uses the TMDB API but is not endorsed or certified by TMDB.</div>
+  </footer>
+</div>
+
+<script>
+const FAM={
+  iron:['#6E1A1C','#E3B23C'], cap:['#1B3566','#E2574C'], thor:['#26364A','#8FC0EA'], hulk:['#264F31','#A6DA6E'],
+  avengers:['#2F2550','#E3B23C'], guardians:['#4E2463','#F39250'], spider:['#831A2A','#66A9EC'], strange:['#163F44','#F2A63C'],
+  wakanda:['#241F3A','#B395F0'], antman:['#5E2222','#D9D4CC'], cosmic:['#1F3159','#F4C552'], widow:['#1D1E24','#D24646'],
+  street:['#2B1715','#E0533E'], tva:['#36421F','#D4B04D'], mystic:['#46193A','#EE6D8D'], shang:['#6A2716','#ECAA45'],
+  dp:['#6B1418','#F2D04A'], f4:['#1A3A6A','#EAF0F7'], other:['#2D3D52','#F0C35A'], multi:['#30333A','#E8833F']
+};
+const TYPE={m:['FILM','ภาพยนตร์'],s:['SERIES','ซีรีส์'],x:['SPECIAL','ตอนพิเศษ'],v:['MULTIVERSE','มัลติเวิร์ส'],u:['COMING','ยังไม่ฉาย']};
+// [id, title|season, family, type, release, setting, optional, note]
+const D=[
+['@','อดีต: ก่อนยุค Avengers','ยุคโบราณ – 1995'],
+['ew','Eyes of Wakanda|1','wakanda','s','2025-08-01','ยุคโบราณ',1],
+['cap1','Captain America: The First Avenger','cap','m','2011-07-22','1942–1945'],
+['osac','One-Shot: Agent Carter','cap','x','2013-09-03','1946',1],
+['cm','Captain Marvel','cosmic','m','2019-03-08','1995',0,'ฉากกลางเครดิต เก็บไว้ดูหลัง Infinity War'],
+['@','ยุคแรกของ Avengers','2010 – 2012'],
+['im1','Iron Man','iron','m','2008-05-02','2010'],
+['im2','Iron Man 2','iron','m','2010-05-07','2011'],
+['ih','The Incredible Hulk','hulk','m','2008-06-13','2011'],
+['osft',"One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",'other','x','2011-10-25','2011',1],
+['thor1','Thor','thor','m','2011-05-06','2011'],
+['osc','One-Shot: The Consultant','other','x','2011-09-13','2011',1],
+['av1','The Avengers','avengers','m','2012-05-04','2012'],
+['os47','One-Shot: Item 47','other','x','2012-09-25','2012',1],
+['@','หลังศึกนิวยอร์ก','2012 – 2015'],
+['thor2','Thor: The Dark World','thor','m','2013-11-08','2013'],
+['im3','Iron Man 3','iron','m','2013-05-03','ธ.ค. 2012'],
+['osk','One-Shot: All Hail the King','iron','x','2014-02-25','2013',1],
+['cap2','Captain America: The Winter Soldier','cap','m','2014-04-04','2014'],
+['gotg1','Guardians of the Galaxy','guardians','m','2014-08-01','2014'],
+['gotg2','Guardians of the Galaxy Vol. 2','guardians','m','2017-05-05','2014'],
+['iag1','I Am Groot|1','guardians','s','2022-08-10','แอนิเมชันสั้น',1],
+['iag2','I Am Groot|2','guardians','s','2023-09-06','แอนิเมชันสั้น',1],
+['av2','Avengers: Age of Ultron','avengers','m','2015-05-01','2015'],
+['ant1','Ant-Man','antman','m','2015-07-17','2015'],
+['@','สงคราม Infinity','2016 – 2023'],
+['cap3','Captain America: Civil War','cap','m','2016-05-06','2016'],
+['bw','Black Widow','widow','m','2021-07-09','2016',0,'ฉากหลังเครดิต เก็บไว้ดูหลัง Endgame'],
+['bp1','Black Panther','wakanda','m','2018-02-16','2016'],
+['sm1','Spider-Man: Homecoming','spider','m','2017-07-07','2016'],
+['ds1','Doctor Strange','strange','m','2016-11-04','2016–2017'],
+['thor3','Thor: Ragnarok','thor','m','2017-11-03','2017'],
+['ant2','Ant-Man and the Wasp','antman','m','2018-07-06','2018',0,'ฉากกลางเครดิต เก็บไว้ดูหลัง Infinity War'],
+['av3','Avengers: Infinity War','avengers','m','2018-04-27','2018'],
+['av4','Avengers: Endgame','avengers','m','2019-04-26','2018–2023'],
+['@','หลัง Endgame','2023 – 2025'],
+['loki1','Loki|1','tva','s','2021-06-09','นอกเวลา (TVA)'],
+['wi1','What If...?|1','multi','v','2021-08-11','จักรวาลคู่ขนาน',1],
+['mz','Marvel Zombies|1','multi','v','2025-09-24','จักรวาลคู่ขนาน',1],
+['wv','WandaVision','mystic','s','2021-01-15','2023'],
+['sc','Shang-Chi and the Legend of the Ten Rings','shang','m','2021-09-03','2024'],
+['fws','The Falcon and the Winter Soldier','cap','s','2021-03-19','2024'],
+['sm2','Spider-Man: Far From Home','spider','m','2019-07-02','2024'],
+['et','Eternals','cosmic','m','2021-11-05','2024'],
+['sm3','Spider-Man: No Way Home','spider','m','2021-12-17','2024'],
+['ds2','Doctor Strange in the Multiverse of Madness','strange','m','2022-05-06','2025'],
+['hk','Hawkeye','street','s','2021-11-24','ธ.ค. 2024'],
+['mk','Moon Knight','mystic','s','2022-03-30','2025'],
+['bp2','Black Panther: Wakanda Forever','wakanda','m','2022-11-11','2025'],
+['echo','Echo','street','s','2024-01-09','2025'],
+['sh','She-Hulk: Attorney at Law','hulk','s','2022-08-18','2025'],
+['msm','Ms. Marvel','cosmic','s','2022-06-08','2025'],
+['thor4','Thor: Love and Thunder','thor','m','2022-07-08','2025'],
+['irh','Ironheart','iron','s','2025-06-24','2025–2026'],
+['wbn','Werewolf by Night','mystic','x','2022-10-07','ไม่ระบุปี',1],
+['gths','The Guardians of the Galaxy Holiday Special','guardians','x','2022-11-25','ธ.ค. 2025',1],
+['@','Multiverse Saga','2026 เป็นต้นไป'],
+['ant3','Ant-Man and the Wasp: Quantumania','antman','m','2023-02-17','2026'],
+['gotg3','Guardians of the Galaxy Vol. 3','guardians','m','2023-05-05','2026'],
+['si','Secret Invasion','cosmic','s','2023-06-21','2026'],
+['mvl','The Marvels','cosmic','m','2023-11-10','2026'],
+['loki2','Loki|2','tva','s','2023-10-05','นอกเวลา (TVA)'],
+['wi2','What If...?|2','multi','v','2023-12-22','จักรวาลคู่ขนาน',1],
+['dpw','Deadpool & Wolverine','dp','m','2024-07-26','มัลติเวิร์ส / TVA'],
+['aga','Agatha All Along','mystic','s','2024-09-18','2026'],
+['wi3','What If...?|3','multi','v','2024-12-22','จักรวาลคู่ขนาน',1],
+['dd1','Daredevil: Born Again|1','street','s','2025-03-04','2026'],
+['cap4','Captain America: Brave New World','cap','m','2025-02-14','2027'],
+['tb','Thunderbolts*','widow','m','2025-05-02','2027'],
+['f4','The Fantastic Four: First Steps','f4','m','2025-07-25','Earth-828 ยุค 60s'],
+['wm','Wonder Man','other','s','2026-01-27','ปัจจุบัน'],
+['dd2','Daredevil: Born Again|2','street','s','2026-03-24','ต่อจากซีซัน 1'],
+['pun','The Punisher: One Last Kill','street','x','2026-05-12','ก่อน Brand New Day',1],
+['sm4','Spider-Man: Brand New Day','spider','m','2026-07-31','2028'],
+['vq','VisionQuest','mystic','s','2026-10-14','ต่อจาก WandaVision'],
+['avd','Avengers: Doomsday','avengers','u','2026-12-18','ยังไม่เปิดเผย'],
+['avs','Avengers: Secret Wars','avengers','u','2027-12-17','ต่อจาก Doomsday'],
+['@','จักรวาลแยก','อยู่นอกไทม์ไลน์หลัก ข้ามได้'],
+['x97a',"X-Men '97|1",'multi','v','2024-03-20','จักรวาลของตัวเอง',1],
+['x97b',"X-Men '97|2",'multi','v','2026-07-01','จักรวาลของตัวเอง',1],
+['yfns','Your Friendly Neighborhood Spider-Man|1','multi','v','2025-01-29','จักรวาลของตัวเอง',1]
+];
+const TH_M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const fmt=s=>{const [y,m,d]=s.split('-').map(Number);return `${d} ${TH_M[m-1]} ${y}`};
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+const items=[];let era=null;
+D.forEach(r=>{
+  if(r[0]==='@'){era={name:r[1],span:r[2]};return}
+  const [title,season]=r[1].split('|');
+  items.push({id:r[0],title,season,fam:r[2],type:r[3],rel:r[4],set:r[5],opt:!!r[6],note:r[7]||'',era});
+});
+
+let seen=new Set();
+try{seen=new Set(JSON.parse(localStorage.getItem('mcu-seen')||'[]'))}catch(e){}
+const save=()=>{try{localStorage.setItem('mcu-seen',JSON.stringify([...seen]))}catch(e){}};
+let hideOpt=false;
+try{hideOpt=localStorage.getItem('mcu-hideopt')==='1'}catch(e){}
+document.getElementById('hideopt').checked=hideOpt;
+
+function motif(t,ac,seed){
+  const r=n=>((seed*9301+n*49297)%233280)/233280;
+  if(t==='m') return `<circle cx="${140+r(1)*30}" cy="${80+r(2)*40}" r="${62+r(3)*18}" fill="${ac}" opacity=".9"/><circle cx="${60}" cy="${150}" r="96" fill="none" stroke="${ac}" stroke-width="1" opacity=".35"/>`;
+  if(t==='s'){let s='';for(let i=0;i<6;i++){const w=60+r(i+4)*120;s+=`<rect x="${200-w}" y="${28+i*19}" width="${w}" height="9" fill="${ac}" opacity="${.9-i*.12}"/>`}return s}
+  if(t==='x') return `<rect x="70" y="40" width="80" height="80" transform="rotate(45 110 80)" fill="none" stroke="${ac}" stroke-width="3"/><rect x="92" y="62" width="36" height="36" transform="rotate(45 110 80)" fill="${ac}"/>`;
+  if(t==='v') return `<circle cx="80" cy="90" r="58" fill="none" stroke="${ac}" stroke-width="2.5"/><circle cx="115" cy="80" r="58" fill="none" stroke="${ac}" stroke-width="2.5" opacity=".7"/><circle cx="150" cy="70" r="58" fill="none" stroke="${ac}" stroke-width="2.5" opacity=".45"/>`;
+  return `<text x="100" y="118" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="84" fill="${ac}" opacity=".9">?</text>`;
+}
+function poster(it,no,yearLabel){
+  const [bg,ac]=FAM[it.fam];
+  const parts=it.title.split(': ');
+  let kick='',big=it.title;
+  if(parts.length>1){kick=parts[0];big=parts.slice(1).join(': ')}
+  if(it.season) kick=(kick?kick+' · ':'')+'Season '+it.season;
+  const L=big.length, sz=L<=8?'s-xl':L<=14?'s-lg':L<=24?'s-md':'s-sm';
+  const seed=[...it.id].reduce((a,c)=>a+c.charCodeAt(0),0);
+  const ac2=it.type==='u'?'#E9E6DF':ac;
+  return `<div class="poster${it.type==='u'?' coming':''}" style="--pbg:${bg};--pac:${ac2}">
+<svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${motif(it.type,ac2,seed)}</svg>
+<span class="pno">No.${String(no).padStart(2,'0')}</span><span class="ptype">${TYPE[it.type][0]}</span>
+<div class="ptxt">${kick?`<span class="pkick">${esc(kick)}</span>`:''}<h3 class="ptitle ${sz}">${esc(big)}</h3>
+<div class="pfoot"><span>MARVEL STUDIOS</span><span>${yearLabel}</span></div></div></div>`;
+}
+function card(it,no,mode){
+  const done=seen.has(it.id);
+  const tag=it.type==='u'?'<span class="tag up">COMING</span>':it.opt?'<span class="tag">เสริม</span>':'';
+  const name=it.title+(it.season?` ซีซัน ${it.season}`:'');
+  const relTxt=it.type==='u'?`เข้าฉาย ${fmt(it.rel)}`:`ฉาย ${fmt(it.rel)}`;
+  const meta=mode==='timeline'?`${TYPE[it.type][1]} · เนื้อเรื่อง ${it.set}<br>${relTxt}`:`${TYPE[it.type][1]} · ${relTxt}<br>เนื้อเรื่อง ${it.set}`;
+  const year=mode==='timeline'?it.set.match(/\d{4}/)?.[0]||'—':it.rel.slice(0,4);
+  return `<article class="card${done?' done':''}" data-id="${it.id}">${poster(it,no,year)}
+<div class="info"><div class="name">${tag}${esc(name)}</div><div class="meta">${meta}</div>
+${it.note?`<div class="note">${it.note}</div>`:''}
+<div class="acts">${it.type!=='u'?`<label class="seen"><input type="checkbox" id="seen-${it.id}" ${done?'checked':''}> ดูแล้ว</label>`:''}<a class="pl" href="https://www.themoviedb.org/search?query=${encodeURIComponent(it.title.replace(/^One-Shot: /,'Marvel One-Shot '))}" target="_blank" rel="noopener">ดูโปสเตอร์จริง ↗</a></div></div></article>`;
+}
+function bands(mode){
+  const vis=items.filter(i=>!(hideOpt&&i.opt));
+  let groups=[];
+  if(mode==='timeline'){
+    vis.forEach(i=>{let g=groups[groups.length-1];if(!g||g.key!==i.era){g={key:i.era,name:i.era.name,span:i.era.span,list:[]};groups.push(g)}g.list.push(i)});
+  }else{
+    [...vis].sort((a,b)=>a.rel.localeCompare(b.rel)).forEach(i=>{const y=i.rel.slice(0,4);let g=groups[groups.length-1];
+      if(!g||g.key!==y){g={key:y,name:'ปี '+y,span:'',list:[]};groups.push(g)}g.list.push(i)});
+    groups.forEach(g=>{const f=g.list.filter(i=>i.type==='m').length,s=g.list.length-f;g.span=`ภาพยนตร์ ${f} · อื่นๆ ${s}`});
+  }
+  let n=0;
+  return groups.map(g=>`<section class="band"><div class="bandhead"><h2>${g.name}</h2><span class="span">${g.span}</span><span class="cnt">${g.list.length} เรื่อง</span></div>
+<div class="grid">${g.list.map(i=>card(i,++n,mode)).join('')}</div></section>`).join('');
+}
+const NOTES={
+  timeline:'เรียงตามเหตุการณ์ที่เกิดในเรื่อง เหมาะกับการดูรอบสอง ถ้าดูครั้งแรก แนะนำแบบ "ตามปีที่ฉาย" เพราะบางเรื่อง เช่น Captain Marvel จะเฉลยของที่หนังภาคหลังตั้งใจเปิดเผย',
+  release:'เรียงตามวันฉายจริงในสหรัฐฯ เป็นลำดับที่ผู้สร้างตั้งใจให้ดู ฉากหลังเครดิตและการเฉลยต่างๆ จะลงตัวที่สุด เหมาะกับการดูครั้งแรก'
+};
+function mode(){return location.hash==='#release'?'release':'timeline'}
+function render(){
+  const m=mode();
+  ['timeline','release'].forEach(k=>{const t=document.getElementById('tab-'+k);k===m?t.setAttribute('aria-current','page'):t.removeAttribute('aria-current')});
+  document.getElementById('viewnote').textContent=NOTES[m];
+  document.getElementById('out').innerHTML=bands(m);
+  progress();
+}
+function progress(){
+  const pool=items.filter(i=>i.type!=='u'&&!(hideOpt&&i.opt));
+  const c=pool.filter(i=>seen.has(i.id)).length;
+  document.getElementById('prog').textContent=`ดูแล้ว ${c}/${pool.length}`;
+  document.getElementById('meter').style.width=(pool.length?Math.round(c/pool.length*100):0)+'%';
+}
+document.getElementById('out').addEventListener('change',e=>{
+  const cb=e.target.closest('.seen input');if(!cb)return;
+  const card=cb.closest('.card'),id=card.dataset.id;
+  cb.checked?seen.add(id):seen.delete(id);card.classList.toggle('done',cb.checked);save();progress();
+});
+document.getElementById('hideopt').addEventListener('change',e=>{hideOpt=e.target.checked;try{localStorage.setItem('mcu-hideopt',hideOpt?'1':'0')}catch(err){}render()});
+// ---- TMDB posters ----
+const IMG='https://image.tmdb.org/t/p/w342';
+let KEY='';try{KEY=localStorage.getItem('mcu-tmdb-key')||''}catch(e){}
+let PC={};try{PC=JSON.parse(localStorage.getItem('mcu-tmdb-posters')||'{}')}catch(e){}
+const savePC=()=>{try{localStorage.setItem('mcu-tmdb-posters',JSON.stringify(PC))}catch(e){}};
+const keystat=t=>document.getElementById('keystat').textContent=t;
+// a few titles need a clearer search term on TMDB
+const QUERY={osac:'Marvel One-Shot: Agent Carter',osft:"Marvel One-Shot: A Funny Thing Happened on the Way to Thor's Hammer",
+  osc:'Marvel One-Shot: The Consultant',os47:'Marvel One-Shot: Item 47',osk:'Marvel One-Shot: All Hail the King',
+  av1:"Marvel's The Avengers",tb:'Thunderbolts*',sc:'Shang-Chi and the Legend of the Ten Rings'};
+async function api(path,params){
+  const u=new URL('https://api.themoviedb.org/3/'+path);
+  const isToken=KEY.length>40;
+  if(!isToken)u.searchParams.set('api_key',KEY);
+  Object.entries(params||{}).forEach(([k,v])=>u.searchParams.set(k,v));
+  const r=await fetch(u,isToken?{headers:{Authorization:'Bearer '+KEY,accept:'application/json'}}:{});
+  if(r.status===401)throw new Error('auth');
+  if(!r.ok)throw new Error('http '+r.status);
+  return r.json();
+}
+async function findPoster(it){
+  const q=QUERY[it.id]||it.title;
+  const yr=it.rel.slice(0,4);
+  const tvFirst=it.type==='s'||it.type==='v';
+  const tries=tvFirst
+    ?[['search/tv',{query:q,first_air_date_year:yr}],['search/tv',{query:q}],['search/movie',{query:q}]]
+    :[['search/movie',{query:q,primary_release_year:yr}],['search/movie',{query:q}],['search/tv',{query:q}]];
+  for(const [p,params] of tries){
+    const j=await api(p,params);
+    const hit=(j.results||[]).find(r=>r.poster_path);
+    if(!hit)continue;
+    if(p==='search/tv'&&it.season){
+      try{const s=await api(`tv/${hit.id}/season/${it.season}`);if(s.poster_path)return s.poster_path}catch(e){if(e.message==='auth')throw e}
+    }
+    return hit.poster_path;
+  }
+  return null;
+}
+function paint(id){
+  const p=PC[id];if(!p)return;
+  const card=document.querySelector(`.card[data-id="${id}"] .poster`);if(!card||card.classList.contains('has-img'))return;
+  const img=new Image();img.className='real';img.alt='';img.loading='lazy';img.src=IMG+p;
+  img.onload=()=>card.classList.add('has-img');
+  card.prepend(img);
+}
+let running=false;
+async function loadPosters(){
+  Object.keys(PC).forEach(paint);
+  if(!KEY||running)return;
+  const todo=items.filter(i=>!(i.id in PC));
+  if(!todo.length){keystat('โหลดโปสเตอร์ครบแล้ว');return}
+  running=true;let done=0;keystat(`กำลังโหลด 0/${todo.length}`);
+  const q=[...todo];
+  async function worker(){
+    while(q.length){
+      const it=q.shift();
+      try{PC[it.id]=await findPoster(it)}catch(e){
+        if(e.message==='auth'){q.length=0;keystat('API key ไม่ถูกต้อง ลองตรวจอีกครั้ง');running=false;return}
+        continue;
+      }
+      savePC();paint(it.id);done++;keystat(`กำลังโหลด ${done}/${todo.length}`);
+    }
+  }
+  await Promise.all([worker(),worker(),worker(),worker()]);
+  if(running){const miss=items.filter(i=>!PC[i.id]).length;keystat(miss?`เสร็จแล้ว หาไม่เจอ ${miss} เรื่อง`:'โหลดโปสเตอร์ครบแล้ว')}
+  running=false;
+}
+document.getElementById('tmdbkey').value=KEY;
+document.getElementById('keyform').addEventListener('submit',e=>{
+  e.preventDefault();
+  KEY=document.getElementById('tmdbkey').value.trim();
+  if(!KEY){keystat('วาง API key ก่อน');return}
+  try{localStorage.setItem('mcu-tmdb-key',KEY)}catch(err){}
+  Object.keys(PC).forEach(k=>{if(PC[k]===null)delete PC[k]});
+  loadPosters();
+});
+document.getElementById('clearkey').addEventListener('click',()=>{
+  KEY='';PC={};document.getElementById('tmdbkey').value='';
+  try{localStorage.removeItem('mcu-tmdb-key');localStorage.removeItem('mcu-tmdb-posters')}catch(e){}
+  keystat('ล้างแล้ว');render();
+});
+const _render=render;
+render=function(){_render();loadPosters()};
+window.addEventListener('hashchange',render);
+render();
+</script>
